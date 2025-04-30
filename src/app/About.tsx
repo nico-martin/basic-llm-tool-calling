@@ -17,7 +17,11 @@ const About: React.FC = () => (
     </p>
     <p>
       Under the hood, this setup uses{" "}
-      <a href="https://webllm.mlc.ai/" target="_blank">
+      <a
+        href="https://webllm.mlc.ai/"
+        target="_blank"
+        className="text-indigo-600 underline"
+      >
         WebLLM
       </a>{" "}
       to run the models. All supported models have fewer than 10 billion
