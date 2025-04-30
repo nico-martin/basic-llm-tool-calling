@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+html {
+  font-size: 14px;
+}
+
+@theme {
+  --font-sans: InterVariable, sans-serif;
+}
