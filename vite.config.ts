@@ -7,7 +7,7 @@ import htmlPlugin from "vite-plugin-html-config";
 
 dotenv.config();
 
-const TITLE = "Function Calling Demo";
+const TITLE = "Basic LLM Tool Calling";
 
 export default defineConfig({
   server: {
