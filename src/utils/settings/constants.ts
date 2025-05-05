@@ -27,7 +27,7 @@ export interface Settings {
 }
 
 export const defaultSettings: Settings = {
-  llm: Llm.QWEN25_1_5,
+  llm: Llm.QWEN3_1_7,
   systemPrompt: "You are a helpful AI Assistant",
   maxRounds: 5,
   temperature: 0,
