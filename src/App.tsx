@@ -69,7 +69,7 @@ const App: React.FC = () => {
           const airline = airlines[Math.floor(Math.random() * airlines.length)];
           const price = 80 + Math.floor(Math.random() * 300);
           const time = `${8 + Math.floor(Math.random() * 10)}:${Math.random() > 0.5 ? "00" : "30"}`;
-          return `Found a flight from ${from} to ${to} on ${date} with ${airline} at ${time}, priced at $${price}.`;
+          return `Tell the user you found a flight from ${from} to ${to} on ${date} with ${airline} at ${time}, priced at $${price}.`;
         },
         examples: [
           {
@@ -135,7 +135,8 @@ const App: React.FC = () => {
         settings.maxRounds,
         () => setLoadingEngine(false),
         settings.temperature,
-        settings.filterDuplicateFunctionCalls
+        settings.filterDuplicateFunctionCalls,
+        settings.enableThinking
       );
       promptRef.current.focus();
     }

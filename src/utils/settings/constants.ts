@@ -12,6 +12,9 @@ export enum Llm {
   QWEN25_0_5,
   QWEN25_1_5,
   QWEN25_3,
+  QWEN3_0_6,
+  QWEN3_1_7,
+  QWEN3_4,
 }
 
 export interface Settings {
@@ -20,6 +23,7 @@ export interface Settings {
   maxRounds: number;
   temperature: number;
   filterDuplicateFunctionCalls: boolean;
+  enableThinking: boolean;
 }
 
 export const defaultSettings: Settings = {
@@ -28,6 +32,7 @@ export const defaultSettings: Settings = {
   maxRounds: 5,
   temperature: 0,
   filterDuplicateFunctionCalls: true,
+  enableThinking: true,
 };
 
 export type LlmConfigString = string;
@@ -103,7 +108,7 @@ export const LLM_CONFIG: Record<Llm, LlmConfigElement> = Object.entries({
     size: 884354432,
     model: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
     cached: llmIsCached(Llm.QWEN25_1_5),
-    label: "Qwen1.5 1.5B IT q4f16",
+    label: "Qwen2.5 1.5B IT q4f16",
     group: "Qwen",
   },
   [Llm.QWEN25_3]: {
@@ -111,6 +116,27 @@ export const LLM_CONFIG: Record<Llm, LlmConfigElement> = Object.entries({
     model: "Qwen2.5-3B-Instruct-q4f16_1-MLC",
     cached: llmIsCached(Llm.QWEN25_3),
     label: "Qwen1.5 3B IT q4f16",
+    group: "Qwen",
+  },
+  [Llm.QWEN3_0_6]: {
+    size: 352059281,
+    model: "Qwen3-0.6B-q4f16_1-MLC",
+    cached: llmIsCached(Llm.QWEN3_0_6),
+    label: "Qwen3 0.6B q4f16",
+    group: "Qwen",
+  },
+  [Llm.QWEN3_1_7]: {
+    size: 985496378,
+    model: "Qwen3-1.7B-q4f16_1-MLC",
+    cached: llmIsCached(Llm.QWEN3_1_7),
+    label: "Qwen3 1.7B q4f16",
+    group: "Qwen",
+  },
+  [Llm.QWEN3_4]: {
+    size: 2282323531,
+    model: "Qwen3-4B-q4f16_1-MLC",
+    cached: llmIsCached(Llm.QWEN3_4),
+    label: "Qwen3 4B q4f16",
     group: "Qwen",
   },
   [Llm.GEMMA2_9B]: {

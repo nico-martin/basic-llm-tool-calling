@@ -26,7 +26,8 @@ class Agent {
     maxRounds: number = 5,
     onEngineReady: () => void = () => {},
     temperature: number = 0,
-    filterDuplicateFunctionCalls: boolean = false
+    filterDuplicateFunctionCalls: boolean = false,
+    thinking: boolean = false
   ) => {
     if (!this.conversation) {
       return "Conversation not set";
@@ -46,7 +47,8 @@ class Agent {
         nextPrompt,
         temperature,
         onEngineReady,
-        round === 1 ? "user" : "tool"
+        round === 1 ? "user" : "tool",
+        thinking
       );
       const parsed = parseXmlFunctionCalls(response);
 

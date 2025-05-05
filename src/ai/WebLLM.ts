@@ -2,7 +2,7 @@ import {
   ChatCompletionMessageParam,
   CreateMLCEngine,
   MLCEngine,
-  prebuiltAppConfig,
+  //prebuiltAppConfig,
 } from "@mlc-ai/web-llm";
 import { v4 as uuidv4 } from "uuid";
 
@@ -10,11 +10,11 @@ import { LlmConfig } from "../utils/settings/constants.ts";
 
 const EVENT_KEY = "messagesChange";
 
-console.log(
+/*console.log(
   prebuiltAppConfig.model_list
     .map((m) => m.model_id)
-    .filter((id) => id.toLowerCase().includes("qwen"))
-);
+    .filter((id) => id.toLowerCase().includes("gemma"))
+);*/
 
 export type Message = ChatCompletionMessageParam & {
   id: string;
@@ -26,7 +26,8 @@ export type Conversation = {
     prompt: string,
     temperature?: number,
     onEngineReady?: () => void,
-    role?: "user" | "tool"
+    role?: "user" | "tool",
+    thinking?: boolean
   ) => Promise<string>;
 };
 
@@ -79,7 +80,8 @@ class WebLLM extends EventTarget {
         prompt: string,
         temperature: number = 0,
         onEngineReady: () => void = () => {},
-        role = "user"
+        role = "user",
+        thinking = false
       ) => {
         const userId = uuidv4();
 
@@ -135,6 +137,9 @@ class WebLLM extends EventTarget {
           stream_options: {
             include_usage: true,
           },
+          extra_body: {
+            enable_thinking: thinking,
+          },
         });
 
         this.messages.push({
@@ -156,6 +161,9 @@ class WebLLM extends EventTarget {
               return m;
             }
           });
+          if (chunk.usage) {
+            console.log(chunk.usage);
+          }
         }
 
         this.messages = this.messages.map((m) => {

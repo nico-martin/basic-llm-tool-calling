@@ -48,6 +48,7 @@ const SettingsModal: React.FC<{
             temperature: Number(formData.get("temperature")),
             filterDuplicateFunctionCalls:
               formData.get("filterDuplicateFunctionCalls") !== null,
+            enableThinking: formData.get("enableThinking") !== null,
           });
           setLoading(true);
           await onSaved(settings);
@@ -135,6 +136,18 @@ const SettingsModal: React.FC<{
             type="checkbox"
             className="mt-2 h-6 w-6 rounded-md bg-white text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
             defaultChecked={settings.filterDuplicateFunctionCalls}
+          />
+        </div>
+        <div className="flex gap-2">
+          <label htmlFor="enableThinking" className="w-1/3 pt-2.5 text-left">
+            Enable Thinking (if supported by the model):
+          </label>
+          <input
+            name="enableThinking"
+            id="enableThinking"
+            type="checkbox"
+            className="mt-2 h-6 w-6 rounded-md bg-white text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+            defaultChecked={settings.enableThinking}
           />
         </div>
         <div className="flex justify-end">

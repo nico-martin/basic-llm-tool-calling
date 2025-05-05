@@ -3,6 +3,7 @@ import React from "react";
 import { Message as MessageI } from "../ai/WebLLM.ts";
 import cn from "../utils/classnames.ts";
 import nl2brJsx from "../utils/nl2brJsx.tsx";
+import parseThinkingJsx from "../utils/parseThinkingJsx.tsx";
 
 const icons = {
   assistant: (
@@ -83,6 +84,8 @@ const Message: React.FC<{
   message: MessageI;
   className?: string;
 }> = ({ message, className = "" }) => {
+  const parsed = parseThinkingJsx(message?.content?.toString() || "");
+
   return (
     <div
       className={cn(
@@ -115,7 +118,14 @@ const Message: React.FC<{
             ""
           )}
         </p>
-        {nl2brJsx(message?.content?.toString() || "")}
+        {Boolean(parsed.thinking) &&
+          nl2brJsx(parsed.thinking).filter(Boolean).length > 0 && (
+            <p className="mb-4 text-xs font-thin">
+              <span className="mb-2 block font-normal">Thinking:</span>
+              {nl2brJsx(parsed.thinking).flat()}
+            </p>
+          )}
+        {Boolean(parsed.content) && <p>{nl2brJsx(parsed.content).flat()}</p>}
       </div>
     </div>
   );
